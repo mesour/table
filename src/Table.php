@@ -1,0 +1,114 @@
+<?php
+/**
+ * Mesour Table Component
+ *
+ * @license LGPL-3.0 and BSD-3-Clause
+ * @copyright (c) 2015 Matous Nemec <matous.nemec@mesour.com>
+ */
+
+namespace Mesour\UI;
+
+use Mesour\Components\Helper;
+use Mesour\Table\BaseTable;
+use Mesour\Table\Column;
+
+/**
+ * @author mesour <matous.nemec@mesour.com>
+ * @package Mesour Table Component
+ */
+class Table extends BaseTable
+{
+
+    public $onRender = array();
+
+    public $onRenderHeader = array();
+
+    public $onRenderBody = array();
+
+    /**
+     * @var array
+     */
+    protected $attributes = array(
+        'class' => 'table'
+    );
+
+    public function setAttributes(array $attributes = array())
+    {
+        $this->attributes = $attributes;
+        return $this;
+    }
+
+    public function setAttribute($key, $value, $append = FALSE)
+    {
+        Helper::createAttribute($this->attributes, $key, $value, $append);
+        return $this;
+    }
+
+    /**
+     * @param $name
+     * @param null $header
+     * @return Column
+     */
+    public function addColumn($name, $header = NULL)
+    {
+        $column = new Column;
+        $column->setHeader($header);
+        return $this[$name] = $column;
+    }
+
+    /**
+     * @return \Mesour\Table\Render\Renderer|\Mesour\Table\Render\Table\Renderer
+     * @throws \Mesour\Components\Exception
+     */
+    public function create()
+    {
+        parent::create();
+
+        $renderer = $this->getRendererFactory();
+
+        $data = $this->getSource()->fetchAll();
+
+        $this->onRender($this, $data);
+
+        $table = $renderer->createTable();
+
+        $table->setAttributes($this->attributes);
+
+        $header = $renderer->createHeader();
+
+        foreach ($this->getContainer() as $column) {
+            $headerCell = $renderer->createHeaderCell($column);
+            $header->addCell($headerCell);
+        }
+        $this->onRenderHeader($header, $data);
+
+        $table->setHeader($header);
+
+        $body = $renderer->createBody();
+
+        foreach ($data as $item) {
+            $row = $renderer->createRow($item);
+            foreach ($this->getContainer() as $column) {
+                $cell = $renderer->createCell($item, $column);
+                $row->addCell($cell);
+            }
+            $body->addRow($row);
+        }
+
+
+        $this->onRenderBody($body, $data);
+
+        $table->setBody($body);
+
+        return $table;
+    }
+
+    public function render()
+    {
+        if ($this->getSession()) {
+            $this->getSession()->saveState();
+        }
+        echo $this->create()->create();
+    }
+
+}
