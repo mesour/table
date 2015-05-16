@@ -19,6 +19,10 @@ use Mesour\Components\IString;
 class Column extends BaseColumn
 {
 
+    /**
+     * Called automatically in renderer
+     * @var array
+     */
     public $onRender = array();
 
     private $header;

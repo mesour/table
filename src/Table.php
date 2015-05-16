@@ -9,6 +9,7 @@
 namespace Mesour\UI;
 
 use Mesour\Components\Helper;
+use Mesour\Components\IComponent;
 use Mesour\Table\BaseTable;
 use Mesour\Table\Column;
 
@@ -32,6 +33,12 @@ class Table extends BaseTable
         'class' => 'table'
     );
 
+    public function __construct($name = NULL, IComponent $parent = NULL)
+    {
+        parent::__construct($name, $parent);
+        $this->addComponent(new Control, 'col');
+    }
+
     public function setAttributes(array $attributes = array())
     {
         $this->attributes = $attributes;
@@ -53,7 +60,15 @@ class Table extends BaseTable
     {
         $column = new Column;
         $column->setHeader($header);
-        return $this[$name] = $column;
+        return $this['col'][$name] = $column;
+    }
+
+    /**
+     * @return \Mesour\Components\IContainer
+     */
+    public function getColumnsContainer()
+    {
+        return $this['col']->getContainer();
     }
 
     /**
@@ -76,7 +91,7 @@ class Table extends BaseTable
 
         $header = $renderer->createHeader();
 
-        foreach ($this->getContainer() as $column) {
+        foreach ($this->getColumnsContainer() as $column) {
             $headerCell = $renderer->createHeaderCell($column);
             $header->addCell($headerCell);
         }
@@ -88,7 +103,7 @@ class Table extends BaseTable
 
         foreach ($data as $item) {
             $row = $renderer->createRow($item);
-            foreach ($this->getContainer() as $column) {
+            foreach ($this->getColumnsContainer() as $column) {
                 $cell = $renderer->createCell($item, $column);
                 $row->addCell($cell);
             }
