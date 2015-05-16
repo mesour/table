@@ -51,7 +51,7 @@ abstract class BaseTable extends Control implements ITable
             if(is_array($source)) {
                 $source = new ArraySource($source);
             } else {
-                throw new InvalidArgumentException('Source must be instance of \Mesour\Table\Source\ISource or array.');
+                throw new InvalidArgumentException('Source must be instance of \Mesour\Source\ISource or array.');
             }
         }
         $this->source = $source;
