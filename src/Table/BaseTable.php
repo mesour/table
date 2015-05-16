@@ -10,10 +10,10 @@ namespace Mesour\Table;
 
 use Mesour\Components\Exception;
 use Mesour\Components\InvalidArgumentException;
+use Mesour\Sources\ArraySource;
+use Mesour\Sources\ISource;
 use Mesour\Table\Render\IRendererFactory;
 use Mesour\Table\Render\Table\RendererFactory;
-use Mesour\Table\Source\ArraySource;
-use Mesour\Table\Source\ISource;
 use Mesour\UI\Control;
 
 /**
@@ -31,7 +31,7 @@ abstract class BaseTable extends Control implements ITable
     private $is_renderer_used = FALSE;
 
     /**
-     * @var ISource
+     * @var \Mesour\Sources\ISource
      */
     private $source;
 

@@ -21,8 +21,6 @@ require_once SRC_DIR . 'Table/BaseTable.php';
 require_once SRC_DIR . 'Table.php';
 
 require_once SRC_DIR . 'Table/ITable.php';
-require_once SRC_DIR . 'Table/Source/ISource.php';
-require_once SRC_DIR . 'Table/Source/ArraySource.php';
 require_once SRC_DIR . 'Table/Render/Attributes.php';
 require_once SRC_DIR . 'Table/Render/Body.php';
 require_once SRC_DIR . 'Table/Render/Cell.php';
