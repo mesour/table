@@ -12,6 +12,7 @@ use Mesour\Components\Helper;
 use Mesour\Components\IComponent;
 use Mesour\Table\BaseTable;
 use Mesour\Table\Column;
+use Mesour\Table\Render\IColumn;
 
 /**
  * @author mesour <matous.nemec@mesour.com>
@@ -58,7 +59,11 @@ class Table extends BaseTable
      */
     public function addColumn($name, $header = NULL)
     {
-        $column = new Column;
+        return $this->setColumn(new Column, $name, $header);
+    }
+
+    protected function setColumn(IColumn $column, $name, $header = NULL)
+    {
         $column->setHeader($header);
         return $this['col'][$name] = $column;
     }

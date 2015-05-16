@@ -1,6 +1,7 @@
 <?php
 
 namespace Mesour\Table\Render;
+
 use Mesour\Components\IString;
 
 /**
@@ -9,6 +10,12 @@ use Mesour\Components\IString;
  */
 interface IColumn
 {
+
+    public function setName($name);
+
+    public function getName();
+
+    public function setHeader($header);
 
     /**
      * @return array

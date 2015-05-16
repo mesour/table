@@ -40,6 +40,27 @@ abstract class BaseColumn extends Control implements IColumn
         return $this;
     }
 
+    /**
+     * @param null $sub_control
+     * @return \Mesour\UI\Control
+     * @throws Exception
+     */
+    public function getTable($sub_control = NULL) {
+        if($this->getParent() instanceof ITable) {
+            $table = $this->getParent();
+        } else {
+            $table = $this->getParent()->getParent();
+        }
+        if(!$table instanceof ITable) {
+            throw new Exception('Column is not attached to Table.');
+        }
+        if(is_null($sub_control)) {
+            return $table;
+        } else {
+            return $table[$sub_control];
+        }
+    }
+
     public function getHeaderAttributes() {
         return array();
     }
