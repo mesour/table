@@ -115,7 +115,6 @@ class Table extends BaseTable
             $body->addRow($row);
         }
 
-
         $this->onRenderBody($body, $data);
 
         $table->setBody($body);
