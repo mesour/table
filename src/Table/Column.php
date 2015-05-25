@@ -25,7 +25,7 @@ class Column extends BaseColumn
      */
     public $onRender = array();
 
-    private $header;
+    private $header = NULL;
 
     private $callback;
 
@@ -33,6 +33,14 @@ class Column extends BaseColumn
     {
         $this->header = $this->getTranslator()->translate($header);
         return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getHeader()
+    {
+        return $this->header;
     }
 
     /**
