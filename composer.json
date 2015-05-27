@@ -17,7 +17,6 @@
     "mesour/array-manager": "dev-master",
     "mesour/sources": "dev-master",
     "mesour/components": "dev-master"
-
   },
   "require-dev": {
     "tracy/tracy": "~2.3.0"

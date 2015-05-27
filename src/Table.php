@@ -10,6 +10,7 @@ namespace Mesour\UI;
 
 use Mesour\Components\Helper;
 use Mesour\Components\IComponent;
+use Mesour\Components\IContainer;
 use Mesour\Table\BaseTable;
 use Mesour\Table\Column;
 use Mesour\Table\Render\IColumn;
@@ -34,7 +35,7 @@ class Table extends BaseTable
         'class' => 'table'
     );
 
-    public function __construct($name = NULL, IComponent $parent = NULL)
+    public function __construct($name = NULL, IContainer $parent = NULL)
     {
         parent::__construct($name, $parent);
         $this->addComponent(new Control, 'col');
@@ -69,11 +70,11 @@ class Table extends BaseTable
     }
 
     /**
-     * @return \Mesour\Components\IContainer
+     * @return array
      */
     public function getColumnsContainer()
     {
-        return $this['col']->getContainer();
+        return $this['col']->getComponents();
     }
 
     /**
