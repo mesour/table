@@ -10,6 +10,7 @@ namespace Mesour\Table;
 
 use Mesour\Components\Exception;
 use Mesour\Components\Helper;
+use Mesour\Components\Html;
 use Mesour\Components\IString;
 
 /**
@@ -60,7 +61,7 @@ class Column extends BaseColumn
      */
     public function getHeaderContent()
     {
-        return !$this->header ? $this->getName() : $this->header;
+        return Html::el('span', !$this->header ? $this->getName() : $this->header);
     }
 
     public function getBodyAttributes($data, $need = TRUE)

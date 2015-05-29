@@ -11,9 +11,6 @@ namespace Mesour\Table;
 use Mesour\Components\Exception;
 use Mesour\Components\Helper;
 use Mesour\Table\Render\IColumn;
-use Mesour\Table\Render\IRendererFactory;
-use Mesour\Table\Render\Table\RendererFactory;
-use Mesour\Table\Source\ISource;
 use Mesour\UI\Control;
 
 /**
@@ -45,27 +42,34 @@ abstract class BaseColumn extends Control implements IColumn
      * @return \Mesour\UI\Control
      * @throws Exception
      */
-    public function getTable($sub_control = NULL) {
-        if($this->getParent() instanceof ITable) {
+    public function getTable($sub_control = NULL)
+    {
+        if ($this->getParent() instanceof ITable) {
             $table = $this->getParent();
         } else {
             $table = $this->getParent()->getParent();
+            if (!$table instanceof ITable) {
+                $this->getParent()->getParent()->getParent();
+            }
         }
-        if(!$table instanceof ITable) {
+        dump($table);
+        if (!$table instanceof ITable) {
             throw new Exception('Column is not attached to Table.');
         }
-        if(is_null($sub_control)) {
+        if (is_null($sub_control)) {
             return $table;
         } else {
             return $table[$sub_control];
         }
     }
 
-    public function getHeaderAttributes() {
+    public function getHeaderAttributes()
+    {
         return array();
     }
 
-    public function getBodyAttributes($data) {
+    public function getBodyAttributes($data)
+    {
         return $this->attributes;
     }
 
