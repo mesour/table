@@ -70,11 +70,11 @@ class Table extends BaseTable
     }
 
     /**
-     * @return array
+     * @return IContainer[]
      */
-    public function getColumnsContainer()
+    public function getColumns()
     {
-        return $this['col']->getComponents();
+        return $this['col'];
     }
 
     /**
@@ -97,7 +97,7 @@ class Table extends BaseTable
 
         $header = $renderer->createHeader();
 
-        foreach ($this->getColumnsContainer() as $column) {
+        foreach ($this->getColumns() as $column) {
             $headerCell = $renderer->createHeaderCell($column);
             $header->addCell($headerCell);
         }
@@ -109,7 +109,7 @@ class Table extends BaseTable
 
         foreach ($data as $item) {
             $row = $renderer->createRow($item);
-            foreach ($this->getColumnsContainer() as $column) {
+            foreach ($this->getColumns() as $column) {
                 $cell = $renderer->createCell($item, $column);
                 $row->addCell($cell);
             }
