@@ -44,15 +44,7 @@ abstract class BaseColumn extends Control implements IColumn
      */
     public function getTable($sub_control = NULL)
     {
-        if ($this->getParent() instanceof ITable) {
-            $table = $this->getParent();
-        } else {
-            $table = $this->getParent()->getParent();
-            if (!$table instanceof ITable) {
-                $this->getParent()->getParent()->getParent();
-            }
-        }
-        dump($table);
+        $table = $this->lookup('Mesour\Table\ITable', FALSE, TRUE);
         if (!$table instanceof ITable) {
             throw new Exception('Column is not attached to Table.');
         }
