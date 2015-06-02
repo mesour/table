@@ -17,6 +17,8 @@ interface IColumn
 
     public function setHeader($header);
 
+    public function getHeader();
+
     /**
      * @return array
      */

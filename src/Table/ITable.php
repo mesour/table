@@ -2,11 +2,13 @@
 
 namespace Mesour\Table;
 
+use Mesour\Components\IContainer;
+
 /**
  * @author mesour <matous.nemec@mesour.com>
  * @package Mesour DataGrid
  */
-interface ITable
+interface ITable extends IContainer
 {
 
     /**
