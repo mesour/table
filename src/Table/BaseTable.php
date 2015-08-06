@@ -28,14 +28,14 @@ abstract class BaseTable extends Control implements ITable
      */
     private $rendererFactory;
 
-    private $is_renderer_used = FALSE;
+    protected $isRendererUsed = FALSE;
 
     /**
      * @var \Mesour\Sources\ISource
      */
     private $source;
 
-    private $is_source_used = FALSE;
+    protected $isSourceUsed = FALSE;
 
     /**
      * @param mixed $source
@@ -44,7 +44,7 @@ abstract class BaseTable extends Control implements ITable
      */
     public function setSource($source)
     {
-        if ($this->is_source_used) {
+        if ($this->isSourceUsed) {
             throw new Exception('Cannot change source after using them.');
         }
         if(!$source instanceof ISource) {
@@ -67,7 +67,7 @@ abstract class BaseTable extends Control implements ITable
         if(!$this->source) {
             throw new Exception('Data source is not set.');
         }
-        $this->is_source_used = TRUE;
+        $this->isSourceUsed = TRUE;
         return $this->source;
     }
 
@@ -78,7 +78,7 @@ abstract class BaseTable extends Control implements ITable
      */
     public function setRendererFactory(IRendererFactory $rendererFactory)
     {
-        if ($this->is_renderer_used) {
+        if ($this->isRendererUsed) {
             throw new Exception('Cannot change renderer after using them.');
         }
         $this->rendererFactory = $rendererFactory;
@@ -93,7 +93,7 @@ abstract class BaseTable extends Control implements ITable
         if (!$this->rendererFactory) {
             $this->rendererFactory = new RendererFactory();
         }
-        $this->is_renderer_used = TRUE;
+        $this->isRendererUsed = TRUE;
         return $this->rendererFactory;
     }
 
