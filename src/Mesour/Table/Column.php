@@ -66,7 +66,11 @@ class Column extends BaseColumn
 
     public function getBodyAttributes($data, $need = TRUE)
     {
-        if ($need && !isset($data->{$this->getName()})) {
+        if (
+            $need
+            && !isset($data->{$this->getName()})
+            && (property_exists($data, $this->getName()) && !is_null($data->{$this->getName()}))
+        ) {
             throw new Exception('Column with name ' . $this->getName() . ' does not exists in data source.');
         }
         return parent::getBodyAttributes($data);
