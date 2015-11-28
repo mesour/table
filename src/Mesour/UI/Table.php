@@ -9,7 +9,6 @@
 namespace Mesour\UI;
 
 use Mesour\Components\Helper;
-use Mesour\Components\IComponent;
 use Mesour\Components\IContainer;
 use Mesour\Table\BaseTable;
 use Mesour\Table\Column;
@@ -22,18 +21,18 @@ use Mesour\Table\Render\IColumn;
 class Table extends BaseTable
 {
 
-    public $onRender = array();
+    public $onRender = [];
 
-    public $onRenderHeader = array();
+    public $onRenderHeader = [];
 
-    public $onRenderBody = array();
+    public $onRenderBody = [];
 
     /**
      * @var array
      */
-    protected $attributes = array(
+    protected $attributes = [
         'class' => 'table'
-    );
+    ];
 
     public function __construct($name = NULL, IContainer $parent = NULL)
     {
@@ -41,7 +40,7 @@ class Table extends BaseTable
         $this->addComponent(new Control, 'col');
     }
 
-    public function setAttributes(array $attributes = array())
+    public function setAttributes(array $attributes = [])
     {
         $this->attributes = $attributes;
         return $this;

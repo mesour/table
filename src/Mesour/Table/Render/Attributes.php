@@ -13,9 +13,9 @@ abstract class Attributes
     /**
      * @var array
      */
-    protected $attributes = array();
+    protected $attributes = [];
 
-    public function setAttributes(array $attributes = array())
+    public function setAttributes(array $attributes = [])
     {
         $this->attributes = $attributes;
         return $this;

@@ -24,7 +24,7 @@ class Column extends BaseColumn
      * Called automatically in renderer
      * @var array
      */
-    public $onRender = array();
+    public $onRender = [];
 
     private $header = NULL;
 
@@ -66,7 +66,7 @@ class Column extends BaseColumn
 
     public function getBodyAttributes($data, $need = TRUE)
     {
-        if ($need && !array_key_exists($this->getName(), $data)) {
+        if ($need && !isset($data->{$this->getName()})) {
             throw new Exception('Column with name ' . $this->getName() . ' does not exists in data source.');
         }
         return parent::getBodyAttributes($data);
@@ -78,7 +78,7 @@ class Column extends BaseColumn
      */
     public function getBodyContent($data)
     {
-        return $this->callback ? Helper::invokeArgs($this->callback, array($data, $this)) : $data[$this->getName()];
+        return $this->callback ? Helper::invokeArgs($this->callback, [$data, $this]) : $data->{$this->getName()};
     }
 
 }

@@ -12,7 +12,7 @@ abstract class Body extends Attributes
     /**
      * @var array
      */
-    protected $rows = array();
+    protected $rows = [];
 
     public function addRow(Row $row)
     {

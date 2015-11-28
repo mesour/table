@@ -23,9 +23,9 @@ abstract class BaseColumn extends Control implements IColumn
     /**
      * @var array
      */
-    protected $attributes = array();
+    protected $attributes = [];
 
-    public function setAttributes(array $attributes = array())
+    public function setAttributes(array $attributes = [])
     {
         $this->attributes = $attributes;
         return $this;
@@ -57,7 +57,7 @@ abstract class BaseColumn extends Control implements IColumn
 
     public function getHeaderAttributes()
     {
-        return array();
+        return [];
     }
 
     public function getBodyAttributes($data)

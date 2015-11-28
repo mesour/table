@@ -9,12 +9,12 @@ namespace Mesour\Table\Render;
 abstract class Header extends Attributes
 {
 
-    protected $header_attributes = array();
+    protected $header_attributes = [];
 
     /**
      * @var array
      */
-    protected $cells = array();
+    protected $cells = [];
 
     public function addCell(HeaderCell $cell)
     {

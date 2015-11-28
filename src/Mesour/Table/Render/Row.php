@@ -12,7 +12,7 @@ abstract class Row extends Attributes
     /**
      * @var array
      */
-    protected $cells = array();
+    protected $cells = [];
 
     protected $rowData;
 
