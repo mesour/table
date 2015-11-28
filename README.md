@@ -7,8 +7,6 @@
 
 - With [Composer](https://getcomposer.org)
 
-        "require": {
-            "mesour/table": "dev-master"
-        }
+        composer require mesour/table
 
 - Or download source from [GitHub](https://github.com/mesour/table/releases)
