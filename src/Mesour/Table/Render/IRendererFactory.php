@@ -1,10 +1,18 @@
 <?php
+/**
+ * This file is part of the Mesour Table (http://components.mesour.com/component/table)
+ *
+ * Copyright (c) 2015 Matouš Němec (http://mesour.com)
+ *
+ * For full licence and copyright please view the file licence.md in root of this project
+ */
 
 namespace Mesour\Table\Render;
 
+
+
 /**
- * @author mesour <matous.nemec@mesour.com>
- * @package Mesour DataGrid
+ * @author Matouš Němec <matous.nemec@mesour.com>
  */
 interface IRendererFactory
 {
@@ -16,15 +24,19 @@ interface IRendererFactory
     public function createHeaderCell(IColumn $column);
 
     /**
+     * @param $data
      * @param IColumn $column
+     * @param $rawData
      * @return Cell
      */
-    public function createCell($rowData, IColumn $column);
+    public function createCell($data, IColumn $column, $rawData);
 
     /**
+     * @param $data
+     * @param $rawData
      * @return Row
      */
-    public function createRow($rowData);
+    public function createRow($data, $rawData);
 
     /**
      * @return Header

@@ -1,9 +1,10 @@
 <?php
 /**
- * Mesour Table Component
+ * This file is part of the Mesour Table (http://components.mesour.com/component/table)
  *
- * @license LGPL-3.0 and BSD-3-Clause
- * @copyright (c) 2015 Matous Nemec <matous.nemec@mesour.com>
+ * Copyright (c) 2015 Matouš Němec (http://mesour.com)
+ *
+ * For full licence and copyright please view the file licence.md in root of this project
  */
 
 namespace Mesour\Table;
@@ -13,12 +14,14 @@ use Mesour\Components\Helper;
 use Mesour\Components\Html;
 use Mesour\Components\IString;
 
+
 /**
- * @author mesour <matous.nemec@mesour.com>
- * @package Mesour Table Component
+ * @author Matouš Němec <matous.nemec@mesour.com>
  */
 class Column extends BaseColumn
 {
+
+    const NO_CALLBACK = 'mesour@no-callback';
 
     /**
      * Called automatically in renderer
@@ -64,12 +67,12 @@ class Column extends BaseColumn
         return Html::el('span', !$this->header ? $this->getName() : $this->header);
     }
 
-    public function getBodyAttributes($data, $need = TRUE)
+    public function getBodyAttributes($data, $need = TRUE, $rawData = [])
     {
         if (
             $need
-            && !isset($data->{$this->getName()})
-            && (property_exists($data, $this->getName()) && !is_null($data->{$this->getName()}))
+            && !isset($data[$this->getName()])
+            && (array_key_exists($this->getName(), $data) && !is_null($data[$this->getName()]))
         ) {
             throw new Exception('Column with name ' . $this->getName() . ' does not exists in data source.');
         }
@@ -78,11 +81,25 @@ class Column extends BaseColumn
 
     /**
      * @param $data
+     * @param array $rawData
      * @return string|IString
      */
-    public function getBodyContent($data)
+    public function getBodyContent($data, $rawData)
     {
-        return $this->callback ? Helper::invokeArgs($this->callback, [$data, $this]) : $data->{$this->getName()};
+        $fromCallback = $this->tryInvokeCallback([$rawData, $this]);
+        if ($fromCallback !== self::NO_CALLBACK) {
+            return $fromCallback;
+        }
+        return ($data[$this->getName()] instanceof \DateTime ? $data[$this->getName()]->format('U') : $data[$this->getName()]);
+    }
+
+    /**
+     * @param array $args
+     * @return int|mixed
+     */
+    protected function tryInvokeCallback(array $args = [])
+    {
+        return $this->callback ? Helper::invokeArgs($this->callback, $args) : self::NO_CALLBACK;
     }
 
 }

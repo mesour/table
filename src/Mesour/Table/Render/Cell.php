@@ -1,24 +1,33 @@
 <?php
+/**
+ * This file is part of the Mesour Table (http://components.mesour.com/component/table)
+ *
+ * Copyright (c) 2015 Matouš Němec (http://mesour.com)
+ *
+ * For full licence and copyright please view the file licence.md in root of this project
+ */
 
 namespace Mesour\Table\Render;
 
+
+
 /**
- * @author mesour <matous.nemec@mesour.com>
- * @package Mesour DataGrid
+ * @author Matouš Němec <matous.nemec@mesour.com>
  */
 abstract class Cell
 {
 
-    protected $rowData;
+    protected $rawData;
 
-    /**
-     * @var IColumn
-     */
+    protected $data;
+
+    /** @var IColumn */
     protected $column;
 
-    public function __construct($rowData, IColumn $column)
+    public function __construct($data, IColumn $column, $rawData)
     {
-        $this->rowData = $rowData;
+        $this->data = $data;
+        $this->rawData = $rawData;
         $this->column = $column;
     }
 

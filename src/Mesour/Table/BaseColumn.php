@@ -1,9 +1,10 @@
 <?php
 /**
- * Mesour Table Component
+ * This file is part of the Mesour Table (http://components.mesour.com/component/table)
  *
- * @license LGPL-3.0 and BSD-3-Clause
- * @copyright (c) 2015 Matous Nemec <matous.nemec@mesour.com>
+ * Copyright (c) 2015 Matouš Němec (http://mesour.com)
+ *
+ * For full licence and copyright please view the file licence.md in root of this project
  */
 
 namespace Mesour\Table;
@@ -13,9 +14,10 @@ use Mesour\Components\Helper;
 use Mesour\Table\Render\IColumn;
 use Mesour\UI\Control;
 
+
+
 /**
- * @author mesour <matous.nemec@mesour.com>
- * @package Mesour Table Component
+ * @author Matouš Němec <matous.nemec@mesour.com>
  */
 abstract class BaseColumn extends Control implements IColumn
 {
@@ -44,7 +46,7 @@ abstract class BaseColumn extends Control implements IColumn
      */
     public function getTable($sub_control = NULL)
     {
-        $table = $this->lookup('Mesour\Table\ITable', FALSE, TRUE);
+        $table = $this->lookup(ITable::class, FALSE, TRUE);
         if (!$table instanceof ITable) {
             throw new Exception('Column is not attached to Table.');
         }
@@ -60,7 +62,7 @@ abstract class BaseColumn extends Control implements IColumn
         return [];
     }
 
-    public function getBodyAttributes($data)
+    public function getBodyAttributes($data, $need = TRUE, $rawData = [])
     {
         return $this->attributes;
     }

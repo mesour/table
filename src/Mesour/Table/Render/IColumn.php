@@ -1,14 +1,23 @@
 <?php
+/**
+ * This file is part of the Mesour Table (http://components.mesour.com/component/table)
+ *
+ * Copyright (c) 2015 Matouš Němec (http://mesour.com)
+ *
+ * For full licence and copyright please view the file licence.md in root of this project
+ */
 
 namespace Mesour\Table\Render;
 
+use Mesour\Components\IContainer;
 use Mesour\Components\IString;
 
+
+
 /**
- * @author mesour <matous.nemec@mesour.com>
- * @package Mesour DataGrid
+ * @author Matouš Němec <matous.nemec@mesour.com>
  */
-interface IColumn
+interface IColumn extends IContainer
 {
 
     public function setName($name);
@@ -31,14 +40,17 @@ interface IColumn
 
     /**
      * @param $data
+     * @param bool|TRUE $need
+     * @param array $rawData
      * @return array
      */
-    public function getBodyAttributes($data);
+    public function getBodyAttributes($data, $need = TRUE, $rawData = []);
 
     /**
      * @param $data
+     * @param array $rawData
      * @return string|IString
      */
-    public function getBodyContent($data);
+    public function getBodyContent($data, $rawData);
 
 }

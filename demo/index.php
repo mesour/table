@@ -81,8 +81,8 @@ require_once SRC_DIR . 'Mesour/Table/Render/Table/RendererFactory.php';
     $table->setAttribute('class', 'table table-striped table-hover');
 
     $table->addColumn('method', 'Method')
-        ->setCallback(function($data) {
-            return \Mesour\Components\Html::el('b')->setText($data['method']);
+        ->setCallback(function($rawData, \Mesour\Table\Column $column) {
+            return \Mesour\Components\Html::el('b')->setText($rawData['method']);
         });
 
     $table->addColumn('params', 'Parameters');
