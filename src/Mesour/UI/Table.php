@@ -79,7 +79,6 @@ class Table extends Mesour\Table\BaseTable
 
     /**
      * @return Mesour\Table\Render\Renderer|Mesour\Table\Render\Table\Renderer
-     * @throws Mesour\Components\Exception
      */
     public function create()
     {
