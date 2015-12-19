@@ -9,9 +9,8 @@
 
 namespace Mesour\Table\Render\Table;
 
-use Mesour\Components\Html;
+use Mesour;
 use Mesour\Table\Render;
-
 
 
 /**
@@ -22,7 +21,7 @@ class Row extends Render\Row
 
     public function create()
     {
-        $tr = Html::el('tr', $this->attributes);
+        $tr = Mesour\Components\Utils\Html::el('tr', $this->attributes);
         foreach ($this->cells as $cell) {
             $tr->add($cell->create());
         }

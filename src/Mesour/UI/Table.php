@@ -9,24 +9,17 @@
 
 namespace Mesour\UI;
 
-use Mesour\Components\Helper;
-use Mesour\Components\IContainer;
-use Mesour\Table\BaseTable;
-use Mesour\Table\Column;
-use Mesour\Table\Render\IColumn;
-use Mesour\Table\Render\Table\Body;
-use Mesour\Table\Render\Table\Header;
-
+use Mesour;
 
 
 /**
  * @author Matouš Němec <matous.nemec@mesour.com>
  *
- * @method null onRenderHeader(Header $header, $rawData, $data)
+ * @method null onRenderHeader(Mesour\Table\Render\Table\Header $header, $rawData, $data)
  * @method null onRender(Table $table, $rawData, $data)
- * @method null onRenderBody(Body $body, $rawData, $data)
+ * @method null onRenderBody(Mesour\Table\Render\Table\Body $body, $rawData, $data)
  */
-class Table extends BaseTable
+class Table extends Mesour\Table\BaseTable
 {
 
     public $onRender = [];
@@ -42,7 +35,7 @@ class Table extends BaseTable
         'class' => 'table'
     ];
 
-    public function __construct($name = NULL, IContainer $parent = NULL)
+    public function __construct($name = NULL, Mesour\Components\ComponentModel\IContainer $parent = NULL)
     {
         parent::__construct($name, $parent);
         $this->addComponent(new Control, 'col');
@@ -56,28 +49,28 @@ class Table extends BaseTable
 
     public function setAttribute($key, $value, $append = FALSE)
     {
-        Helper::createAttribute($this->attributes, $key, $value, $append);
+        Mesour\Components\Utils\Helpers::createAttribute($this->attributes, $key, $value, $append);
         return $this;
     }
 
     /**
      * @param $name
      * @param null $header
-     * @return Column
+     * @return Mesour\Table\Column
      */
     public function addColumn($name, $header = NULL)
     {
-        return $this->setColumn(new Column, $name, $header);
+        return $this->setColumn(new Mesour\Table\Column, $name, $header);
     }
 
-    protected function setColumn(IColumn $column, $name, $header = NULL)
+    protected function setColumn(Mesour\Table\Render\IColumn $column, $name, $header = NULL)
     {
         $column->setHeader($header);
         return $this['col'][$name] = $column;
     }
 
     /**
-     * @return IContainer[]
+     * @return Mesour\Components\ComponentModel\IContainer[]
      */
     public function getColumns()
     {
@@ -85,8 +78,8 @@ class Table extends BaseTable
     }
 
     /**
-     * @return \Mesour\Table\Render\Renderer|\Mesour\Table\Render\Table\Renderer
-     * @throws \Mesour\Components\Exception
+     * @return Mesour\Table\Render\Renderer|Mesour\Table\Render\Table\Renderer
+     * @throws Mesour\Components\Exception
      */
     public function create()
     {
@@ -106,7 +99,7 @@ class Table extends BaseTable
         $header = $renderer->createHeader();
 
         foreach ($this->getColumns() as $column) {
-            /** @var IColumn $column */
+            /** @var Mesour\Table\Render\IColumn $column */
             $headerCell = $renderer->createHeaderCell($column);
             $header->addCell($headerCell);
         }

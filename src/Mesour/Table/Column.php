@@ -9,10 +9,7 @@
 
 namespace Mesour\Table;
 
-use Mesour\Components\Exception;
-use Mesour\Components\Helper;
-use Mesour\Components\Html;
-use Mesour\Components\IString;
+use Mesour;
 
 
 /**
@@ -50,21 +47,21 @@ class Column extends BaseColumn
     /**
      * @param $callback  callable
      * @return $this
-     * @throws \Mesour\Components\InvalidArgumentException
+     * @throws Mesour\InvalidArgumentException
      */
     public function setCallback($callback)
     {
-        Helper::checkCallback($callback);
+        Mesour\Components\Utils\Helpers::checkCallback($callback);
         $this->callback = $callback;
         return $this;
     }
 
     /**
-     * @return string|IString
+     * @return string|Mesour\Components\Utils\IString
      */
     public function getHeaderContent()
     {
-        return Html::el('span', !$this->header ? $this->getName() : $this->header);
+        return Mesour\Components\Utils\Html::el('span', !$this->header ? $this->getName() : $this->header);
     }
 
     public function getBodyAttributes($data, $need = TRUE, $rawData = [])
@@ -74,7 +71,7 @@ class Column extends BaseColumn
             && !isset($data[$this->getName()])
             && (array_key_exists($this->getName(), $data) && !is_null($data[$this->getName()]))
         ) {
-            throw new Exception('Column with name ' . $this->getName() . ' does not exists in data source.');
+            throw new Mesour\OutOfRangeException('Column with name ' . $this->getName() . ' does not exists in data source.');
         }
         return parent::getBodyAttributes($data);
     }
@@ -82,7 +79,7 @@ class Column extends BaseColumn
     /**
      * @param $data
      * @param array $rawData
-     * @return string|IString
+     * @return string|Mesour\Components\Utils\IString
      */
     public function getBodyContent($data, $rawData)
     {
@@ -90,7 +87,11 @@ class Column extends BaseColumn
         if ($fromCallback !== self::NO_CALLBACK) {
             return $fromCallback;
         }
-        return ($data[$this->getName()] instanceof \DateTime ? $data[$this->getName()]->format('U') : $data[$this->getName()]);
+        $content = $data[$this->getName()];
+        if ($content instanceof \DateTime) {
+            return $content->format('U');
+        }
+        return $content;
     }
 
     /**
@@ -99,7 +100,7 @@ class Column extends BaseColumn
      */
     protected function tryInvokeCallback(array $args = [])
     {
-        return $this->callback ? Helper::invokeArgs($this->callback, $args) : self::NO_CALLBACK;
+        return $this->callback ? Mesour\Components\Utils\Helpers::invokeArgs($this->callback, $args) : self::NO_CALLBACK;
     }
 
 }

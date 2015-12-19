@@ -9,15 +9,13 @@
 
 namespace Mesour\Table\Render;
 
-use Mesour\Components\IContainer;
-use Mesour\Components\IString;
-
+use Mesour;
 
 
 /**
  * @author Matouš Němec <matous.nemec@mesour.com>
  */
-interface IColumn extends IContainer
+interface IColumn extends Mesour\Components\ComponentModel\IContainer
 {
 
     public function setName($name);
@@ -34,7 +32,7 @@ interface IColumn extends IContainer
     public function getHeaderAttributes();
 
     /**
-     * @return string|IString
+     * @return string|Mesour\Components\Utils\IString
      */
     public function getHeaderContent();
 
@@ -49,7 +47,7 @@ interface IColumn extends IContainer
     /**
      * @param $data
      * @param array $rawData
-     * @return string|IString
+     * @return string|Mesour\Components\Utils\IString
      */
     public function getBodyContent($data, $rawData);
 

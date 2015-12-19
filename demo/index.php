@@ -15,32 +15,26 @@ define('SRC_DIR', __DIR__ . '/../src/');
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+spl_autoload_register('loadClasses', true, true);
+
+function loadClasses($className)
+{
+    $filename = str_replace('\\', DIRECTORY_SEPARATOR, $className) . '.php';
+
+    if (!is_file(SRC_DIR . $filename)) {
+        return FALSE;
+    }
+
+    require_once SRC_DIR . $filename;
+
+    return TRUE;
+}
+
 @mkdir(__DIR__ . '/log');
 
 \Tracy\Debugger::enable(\Tracy\Debugger::DEVELOPMENT, __DIR__ . '/log');
 
-require_once SRC_DIR . 'Mesour/Table/ITable.php';
-require_once SRC_DIR . 'Mesour/Table/BaseTable.php';
-require_once SRC_DIR . 'Mesour/UI/Table.php';
 
-require_once SRC_DIR . 'Mesour/Table/Render/Attributes.php';
-require_once SRC_DIR . 'Mesour/Table/Render/Body.php';
-require_once SRC_DIR . 'Mesour/Table/Render/Cell.php';
-require_once SRC_DIR . 'Mesour/Table/Render/Header.php';
-require_once SRC_DIR . 'Mesour/Table/Render/HeaderCell.php';
-require_once SRC_DIR . 'Mesour/Table/Render/IColumn.php';
-require_once SRC_DIR . 'Mesour/Table/BaseColumn.php';
-require_once SRC_DIR . 'Mesour/Table/Column.php';
-require_once SRC_DIR . 'Mesour/Table/Render/IRendererFactory.php';
-require_once SRC_DIR . 'Mesour/Table/Render/Renderer.php';
-require_once SRC_DIR . 'Mesour/Table/Render/Row.php';
-require_once SRC_DIR . 'Mesour/Table/Render/Table/Row.php';
-require_once SRC_DIR . 'Mesour/Table/Render/Table/Renderer.php';
-require_once SRC_DIR . 'Mesour/Table/Render/Table/Body.php';
-require_once SRC_DIR . 'Mesour/Table/Render/Table/Cell.php';
-require_once SRC_DIR . 'Mesour/Table/Render/Table/Header.php';
-require_once SRC_DIR . 'Mesour/Table/Render/Table/HeaderCell.php';
-require_once SRC_DIR . 'Mesour/Table/Render/Table/RendererFactory.php';
 
 ?>
 
@@ -82,7 +76,7 @@ require_once SRC_DIR . 'Mesour/Table/Render/Table/RendererFactory.php';
 
     $table->addColumn('method', 'Method')
         ->setCallback(function($rawData, \Mesour\Table\Column $column) {
-            return \Mesour\Components\Html::el('b')->setText($rawData['method']);
+            return \Mesour\Components\Utils\Html::el('b')->setText($rawData['method']);
         });
 
     $table->addColumn('params', 'Parameters');

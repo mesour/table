@@ -9,14 +9,13 @@
 
 namespace Mesour\Table;
 
-use Mesour\Components\IContainer;
-
+use Mesour;
 
 
 /**
  * @author Matouš Němec <matous.nemec@mesour.com>
  */
-interface ITable extends IContainer
+interface ITable extends Mesour\Components\ComponentModel\IContainer
 {
 
     /**

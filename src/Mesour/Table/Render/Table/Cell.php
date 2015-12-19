@@ -9,10 +9,8 @@
 
 namespace Mesour\Table\Render\Table;
 
-use Mesour\Components\Events;
-use Mesour\Components\Html;
+use Mesour;
 use Mesour\Table\Render;
-
 
 
 /**
@@ -23,14 +21,14 @@ class Cell extends Render\Cell
 
     public function create()
     {
-        if($this->column instanceof Events && isset($this->column->onRender)) {
+        if ($this->column instanceof Mesour\Object && isset($this->column->onRender)) {
             $this->column->onRender($this->rawData, $this->column);
         }
         $attributes = $this->column->getBodyAttributes($this->data, TRUE, $this->rawData);
         if ($attributes === FALSE) {
             return '';
         }
-        $td = Html::el('td', $attributes);
+        $td = Mesour\Components\Utils\Html::el('td', $attributes);
         $content = $this->column->getBodyContent($this->data, $this->rawData);
 
         if (!is_null($content)) {

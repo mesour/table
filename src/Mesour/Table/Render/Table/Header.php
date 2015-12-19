@@ -9,9 +9,8 @@
 
 namespace Mesour\Table\Render\Table;
 
-use Mesour\Components\Html;
+use Mesour;
 use Mesour\Table\Render;
-
 
 
 /**
@@ -22,8 +21,8 @@ class Header extends Render\Header
 
     public function create()
     {
-        $tableHead = Html::el('thead', $this->header_attributes);
-        $tr = Html::el('tr', $this->attributes);
+        $tableHead = Mesour\Components\Utils\Html::el('thead', $this->header_attributes);
+        $tr = Mesour\Components\Utils\Html::el('tr', $this->attributes);
         foreach ($this->cells as $cell) {
             $tr->add($cell->create());
         }

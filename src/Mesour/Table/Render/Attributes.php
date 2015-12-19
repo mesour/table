@@ -9,8 +9,7 @@
 
 namespace Mesour\Table\Render;
 
-use Mesour\Components\Helper;
-
+use Mesour;
 
 
 /**
@@ -32,7 +31,7 @@ abstract class Attributes
 
     public function setAttribute($key, $value, $append = FALSE)
     {
-        Helper::createAttribute($this->attributes, $key, $value, $append);
+        Mesour\Components\Utils\Helpers::createAttribute($this->attributes, $key, $value, $append);
         return $this;
     }
 

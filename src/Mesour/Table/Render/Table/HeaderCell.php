@@ -9,9 +9,8 @@
 
 namespace Mesour\Table\Render\Table;
 
-use Mesour\Components\Html;
+use Mesour;
 use Mesour\Table\Render;
-
 
 
 /**
@@ -26,7 +25,7 @@ class HeaderCell extends Render\HeaderCell
         if ($attributes === FALSE) {
             return '';
         }
-        $td = Html::el('th', $attributes);
+        $td = Mesour\Components\Utils\Html::el('th', $attributes);
         $td->setHtml($this->column->getHeaderContent());
         return $td;
     }

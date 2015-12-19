@@ -8,24 +8,17 @@
  */
 namespace Mesour\Table;
 
-use Mesour\Components\Exception;
-use Mesour\Components\InvalidArgumentException;
-use Mesour\Sources\ArraySource;
-use Mesour\Sources\ISource;
-use Mesour\Table\Render\IRendererFactory;
-use Mesour\Table\Render\Table\RendererFactory;
-use Mesour\UI\Control;
-
+use Mesour;
 
 
 /**
  * @author Matouš Němec <matous.nemec@mesour.com>
  */
-abstract class BaseTable extends Control implements ITable
+abstract class BaseTable extends Mesour\UI\Control implements ITable
 {
 
     /**
-     * @var IRendererFactory
+     * @var Mesour\Table\Render\IRendererFactory
      */
     private $rendererFactory;
 
@@ -41,18 +34,19 @@ abstract class BaseTable extends Control implements ITable
     /**
      * @param mixed $source
      * @return $this
-     * @throws Exception
+     * @throws Mesour\InvalidStateException
+     * @throws Mesour\InvalidArgumentException
      */
     public function setSource($source)
     {
         if ($this->isSourceUsed) {
-            throw new Exception('Cannot change source after using them.');
+            throw new Mesour\InvalidStateException('Cannot change source after using them.');
         }
-        if (!$source instanceof ISource) {
+        if (!$source instanceof Mesour\Sources\ISource) {
             if (is_array($source)) {
-                $source = new ArraySource($source);
+                $source = new Mesour\Sources\ArraySource($source);
             } else {
-                throw new InvalidArgumentException('Source must be instance of ' . ISource::class . ' or array.');
+                throw new Mesour\Sources\InvalidArgumentException('Source must be instance of ' . Mesour\Sources\ISource::class . ' or array.');
             }
         }
         $this->source = $source;
@@ -60,39 +54,39 @@ abstract class BaseTable extends Control implements ITable
     }
 
     /**
-     * @return ISource
-     * @throws Exception
+     * @return Mesour\Sources\ISource
+     * @throws Mesour\InvalidStateException
      */
     public function getSource()
     {
         if (!$this->source) {
-            throw new Exception('Data source is not set.');
+            throw new Mesour\InvalidStateException('Data source is not set.');
         }
         $this->isSourceUsed = TRUE;
         return $this->source;
     }
 
     /**
-     * @param IRendererFactory $rendererFactory
+     * @param Mesour\Table\Render\IRendererFactory $rendererFactory
      * @return $this
-     * @throws Exception
+     * @throws Mesour\InvalidStateException
      */
-    public function setRendererFactory(IRendererFactory $rendererFactory)
+    public function setRendererFactory(Mesour\Table\Render\IRendererFactory $rendererFactory)
     {
         if ($this->isRendererUsed) {
-            throw new Exception('Cannot change renderer after using them.');
+            throw new Mesour\InvalidStateException('Cannot change renderer after using them.');
         }
         $this->rendererFactory = $rendererFactory;
         return $this;
     }
 
     /**
-     * @return IRendererFactory|RendererFactory
+     * @return Mesour\Table\Render\IRendererFactory|Mesour\Table\Render\Table\RendererFactory
      */
     protected function getRendererFactory()
     {
         if (!$this->rendererFactory) {
-            $this->rendererFactory = new RendererFactory();
+            $this->rendererFactory = new Mesour\Table\Render\Table\RendererFactory();
         }
         $this->isRendererUsed = TRUE;
         return $this->rendererFactory;
