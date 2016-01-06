@@ -10,13 +10,14 @@
   }],
   "require": {
     "php": ">=5.5.0",
-    "mesour/array-manager": "~0.1.0",
-    "mesour/sources": "~0.1.0",
-    "mesour/components": "~0.1.0"
+    "mesour/array-manager": "@dev",
+    "mesour/sources": "@dev",
+    "mesour/components": "@dev"
   },
   "require-dev": {
     "tracy/tracy": "~2.3.0"
   },
+  "minimum-stability": "dev",
   "autoload": {
     "classmap": ["src/"]
   }
