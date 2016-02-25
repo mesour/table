@@ -85,7 +85,7 @@ function loadClasses($className)
 
     $table->addColumn('description', 'Description');
 
-    $table->render();
+    echo $table->render();
 
     ?>
 </div>

@@ -126,10 +126,9 @@ class Table extends Mesour\Table\BaseTable
 
     public function render()
     {
-        if ($this->getSession()) {
-            $this->getSession()->saveState();
-        }
-        echo $this->create()->create();
+        /** @var Mesour\Table\Render\Renderer $renderer */
+        $renderer = parent::render();
+        return $renderer->create();
     }
 
 }
