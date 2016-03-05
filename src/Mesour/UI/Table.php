@@ -18,7 +18,7 @@ use Mesour;
  * @method null onRenderHeader(Mesour\Table\Render\Table\Header $header, $rawData, $data)
  * @method null onRender(Table $table, $rawData, $data)
  * @method null onRenderBody(Mesour\Table\Render\Table\Body $body, $rawData, $data)
- * @method null onRenderRow(Mesour\Table\Render\Table\Row $body, $rawData, $data)
+ * @method null onRenderRow(Mesour\Table\Render\Table\Row $row, $rawData, $data)
  */
 class Table extends Mesour\Table\BaseTable
 {
