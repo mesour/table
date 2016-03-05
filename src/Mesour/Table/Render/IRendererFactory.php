@@ -16,40 +16,40 @@ namespace Mesour\Table\Render;
 interface IRendererFactory
 {
 
-    /**
-     * @param IColumn $column
-     * @return HeaderCell
-     */
-    public function createHeaderCell(IColumn $column);
+	/**
+	 * @param IColumn $column
+	 * @return HeaderCell
+	 */
+	public function createHeaderCell(IColumn $column);
 
-    /**
-     * @param $data
-     * @param IColumn $column
-     * @param $rawData
-     * @return Cell
-     */
-    public function createCell($data, IColumn $column, $rawData);
+	/**
+	 * @param $data
+	 * @param IColumn $column
+	 * @param $rawData
+	 * @return Cell
+	 */
+	public function createCell($data, IColumn $column, $rawData);
 
-    /**
-     * @param $data
-     * @param $rawData
-     * @return Row
-     */
-    public function createRow($data, $rawData);
+	/**
+	 * @param $data
+	 * @param $rawData
+	 * @return Row
+	 */
+	public function createRow($data, $rawData);
 
-    /**
-     * @return Header
-     */
-    public function createHeader();
+	/**
+	 * @return Header
+	 */
+	public function createHeader();
 
-    /**
-     * @return Body
-     */
-    public function createBody();
+	/**
+	 * @return Body
+	 */
+	public function createBody();
 
-    /**
-     * @return Renderer
-     */
-    public function createTable();
+	/**
+	 * @return Renderer
+	 */
+	public function createTable();
 
 }

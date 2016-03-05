@@ -18,117 +18,121 @@ use Mesour;
  * @method null onRenderHeader(Mesour\Table\Render\Table\Header $header, $rawData, $data)
  * @method null onRender(Table $table, $rawData, $data)
  * @method null onRenderBody(Mesour\Table\Render\Table\Body $body, $rawData, $data)
+ * @method null onRenderRow(Mesour\Table\Render\Table\Row $body, $rawData, $data)
  */
 class Table extends Mesour\Table\BaseTable
 {
 
-    public $onRender = [];
+	public $onRender = [];
 
-    public $onRenderHeader = [];
+	public $onRenderHeader = [];
 
-    public $onRenderBody = [];
+	public $onRenderBody = [];
 
-    /**
-     * @var array
-     */
-    protected $attributes = [
-        'class' => 'table'
-    ];
+	public $onRenderRow = [];
 
-    public function __construct($name = NULL, Mesour\Components\ComponentModel\IContainer $parent = NULL)
-    {
-        parent::__construct($name, $parent);
-        $this->addComponent(new Control, 'col');
-    }
+	/**
+	 * @var array
+	 */
+	protected $attributes = [
+		'class' => 'table',
+	];
 
-    public function setAttributes(array $attributes = [])
-    {
-        $this->attributes = $attributes;
-        return $this;
-    }
+	public function __construct($name = null, Mesour\Components\ComponentModel\IContainer $parent = null)
+	{
+		parent::__construct($name, $parent);
+		$this->addComponent(new Control, 'col');
+	}
 
-    public function setAttribute($key, $value, $append = FALSE)
-    {
-        Mesour\Components\Utils\Helpers::createAttribute($this->attributes, $key, $value, $append);
-        return $this;
-    }
+	public function setAttributes(array $attributes = [])
+	{
+		$this->attributes = $attributes;
+		return $this;
+	}
 
-    /**
-     * @param $name
-     * @param null $header
-     * @return Mesour\Table\Column
-     */
-    public function addColumn($name, $header = NULL)
-    {
-        return $this->setColumn(new Mesour\Table\Column, $name, $header);
-    }
+	public function setAttribute($key, $value, $append = false)
+	{
+		Mesour\Components\Utils\Helpers::createAttribute($this->attributes, $key, $value, $append);
+		return $this;
+	}
 
-    protected function setColumn(Mesour\Table\Render\IColumn $column, $name, $header = NULL)
-    {
-        $column->setHeader($header);
-        return $this['col'][$name] = $column;
-    }
+	/**
+	 * @param $name
+	 * @param null $header
+	 * @return Mesour\Table\Column
+	 */
+	public function addColumn($name, $header = null)
+	{
+		return $this->setColumn(new Mesour\Table\Column, $name, $header);
+	}
 
-    /**
-     * @return Mesour\Components\ComponentModel\IContainer[]
-     */
-    public function getColumns()
-    {
-        return $this['col'];
-    }
+	protected function setColumn(Mesour\Table\Render\IColumn $column, $name, $header = null)
+	{
+		$column->setHeader($header);
+		return $this['col'][$name] = $column;
+	}
 
-    /**
-     * @return Mesour\Table\Render\Renderer|Mesour\Table\Render\Table\Renderer
-     */
-    public function create()
-    {
-        parent::create();
+	/**
+	 * @return Mesour\Components\ComponentModel\IContainer[]
+	 */
+	public function getColumns()
+	{
+		return $this['col'];
+	}
 
-        $renderer = $this->getRendererFactory();
+	/**
+	 * @return Mesour\Table\Render\Renderer|Mesour\Table\Render\Table\Renderer
+	 */
+	public function create()
+	{
+		parent::create();
 
-        $data = $this->getSource()->fetchAll();
-        $rawData = $this->getSource()->fetchLastRawRows();
+		$renderer = $this->getRendererFactory();
 
-        $this->onRender($this, $rawData, $data);
+		$data = $this->getSource()->fetchAll();
+		$rawData = $this->getSource()->fetchLastRawRows();
 
-        $table = $renderer->createTable();
+		$this->onRender($this, $rawData, $data);
 
-        $table->setAttributes($this->attributes);
+		$table = $renderer->createTable();
 
-        $header = $renderer->createHeader();
+		$table->setAttributes($this->attributes);
 
-        foreach ($this->getColumns() as $column) {
-            /** @var Mesour\Table\Render\IColumn $column */
-            $headerCell = $renderer->createHeaderCell($column);
-            $header->addCell($headerCell);
-        }
-        $this->onRenderHeader($header, $rawData, $data);
+		$header = $renderer->createHeader();
 
-        $table->setHeader($header);
+		foreach ($this->getColumns() as $column) {
+			/** @var Mesour\Table\Render\IColumn $column */
+			$headerCell = $renderer->createHeaderCell($column);
+			$header->addCell($headerCell);
+		}
+		$this->onRenderHeader($header, $rawData, $data);
 
-        $body = $renderer->createBody();
+		$table->setHeader($header);
 
-        foreach ($data as $key => $item) {
-            $row = $renderer->createRow($item, $rawData[$key]);
-            foreach ($this->getColumns() as $column) {
-                $cell = $renderer->createCell($item, $column, $rawData[$key]);
-                $row->addCell($cell);
-            }
-            $body->addRow($row);
-        }
+		$body = $renderer->createBody();
 
-        $this->onRenderBody($body, $rawData, $data);
+		foreach ($data as $key => $item) {
+			$row = $renderer->createRow($item, $rawData[$key]);
+			foreach ($this->getColumns() as $column) {
+				$cell = $renderer->createCell($item, $column, $rawData[$key]);
+				$row->addCell($cell);
+			}
+			$this->onRenderRow($row, $rawData, $item);
+			$body->addRow($row);
+		}
 
-        $table->setBody($body);
+		$this->onRenderBody($body, $rawData, $data);
 
-        return $table;
-    }
+		$table->setBody($body);
 
-    public function render()
-    {
-        /** @var Mesour\Table\Render\Renderer $renderer */
-        $renderer = parent::render();
-        return $renderer->create();
-    }
+		return $table;
+	}
+
+	public function render()
+	{
+		/** @var Mesour\Table\Render\Renderer $renderer */
+		$renderer = parent::render();
+		return $renderer->create();
+	}
 
 }

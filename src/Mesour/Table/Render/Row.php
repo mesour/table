@@ -16,32 +16,32 @@ namespace Mesour\Table\Render;
 abstract class Row extends Attributes
 {
 
-    /** @var Cell[] */
-    protected $cells = [];
+	/** @var Cell[] */
+	protected $cells = [];
 
-    protected $data;
+	protected $data;
 
-    protected $rawData;
+	protected $rawData;
 
-    /** @var Body */
-    protected $body;
+	/** @var Body */
+	protected $body;
 
-    public function __construct($data, $rawData)
-    {
-        $this->data = $data;
-        $this->rawData = $rawData;
-    }
+	public function __construct($data, $rawData)
+	{
+		$this->data = $data;
+		$this->rawData = $rawData;
+	}
 
-    public function addCell(Cell $cell)
-    {
-        $this->cells[] = $cell;
-    }
+	public function addCell(Cell $cell)
+	{
+		$this->cells[] = $cell;
+	}
 
-    public function setBody(Body $body)
-    {
-        $this->body = $body;
-    }
+	public function setBody(Body $body)
+	{
+		$this->body = $body;
+	}
 
-    abstract public function create();
+	abstract public function create();
 
 }

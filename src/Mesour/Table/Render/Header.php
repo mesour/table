@@ -16,23 +16,23 @@ namespace Mesour\Table\Render;
 abstract class Header extends Attributes
 {
 
-    protected $header_attributes = [];
+	protected $header_attributes = [];
 
-    /**
-     * @var Cell[]
-     */
-    protected $cells = [];
+	/**
+	 * @var Cell[]
+	 */
+	protected $cells = [];
 
-    public function addCell(HeaderCell $cell)
-    {
-        $this->cells[] = $cell;
-    }
+	public function addCell(HeaderCell $cell)
+	{
+		$this->cells[] = $cell;
+	}
 
-    public function setTHeadAttributes(array $header_attributes)
-    {
-        $this->header_attributes = $header_attributes;
-    }
+	public function setTHeadAttributes(array $header_attributes)
+	{
+		$this->header_attributes = $header_attributes;
+	}
 
-    abstract public function create();
+	abstract public function create();
 
 }

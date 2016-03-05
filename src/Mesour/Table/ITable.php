@@ -18,12 +18,12 @@ use Mesour;
 interface ITable extends Mesour\Components\ComponentModel\IContainer
 {
 
-    /**
-     * @param mixed $source
-     * @return mixed
-     */
-    public function setSource($source);
+	/**
+	 * @param mixed $source
+	 * @return mixed
+	 */
+	public function setSource($source);
 
-    public function render();
+	public function render();
 
 }

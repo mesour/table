@@ -19,13 +19,13 @@ use Mesour\Table\Render;
 class Row extends Render\Row
 {
 
-    public function create()
-    {
-        $tr = Mesour\Components\Utils\Html::el('tr', $this->attributes);
-        foreach ($this->cells as $cell) {
-            $tr->add($cell->create());
-        }
-        return $tr;
-    }
+	public function create()
+	{
+		$tr = Mesour\Components\Utils\Html::el('tr', $this->attributes);
+		foreach ($this->cells as $cell) {
+			$tr->add($cell->create());
+		}
+		return $tr;
+	}
 
 }

@@ -16,16 +16,16 @@ namespace Mesour\Table\Render;
 abstract class HeaderCell
 {
 
-    /**
-     * @var IColumn
-     */
-    protected $column;
+	/**
+	 * @var IColumn
+	 */
+	protected $column;
 
-    public function __construct(IColumn $column)
-    {
-        $this->column = $column;
-    }
+	public function __construct(IColumn $column)
+	{
+		$this->column = $column;
+	}
 
-    abstract public function create();
+	abstract public function create();
 
 }

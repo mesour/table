@@ -18,21 +18,21 @@ use Mesour;
 abstract class Attributes
 {
 
-    /**
-     * @var array
-     */
-    protected $attributes = [];
+	/**
+	 * @var array
+	 */
+	protected $attributes = [];
 
-    public function setAttributes(array $attributes = [])
-    {
-        $this->attributes = $attributes;
-        return $this;
-    }
+	public function setAttributes(array $attributes = [])
+	{
+		$this->attributes = $attributes;
+		return $this;
+	}
 
-    public function setAttribute($key, $value, $append = FALSE)
-    {
-        Mesour\Components\Utils\Helpers::createAttribute($this->attributes, $key, $value, $append);
-        return $this;
-    }
+	public function setAttribute($key, $value, $append = false)
+	{
+		Mesour\Components\Utils\Helpers::createAttribute($this->attributes, $key, $value, $append);
+		return $this;
+	}
 
 }

@@ -16,26 +16,26 @@ namespace Mesour\Table\Render;
 abstract class Renderer extends Attributes
 {
 
-    /**
-     * @var Header
-     */
-    protected $header;
+	/**
+	 * @var Header
+	 */
+	protected $header;
 
-    /**
-     * @var Body
-     */
-    protected $body;
+	/**
+	 * @var Body
+	 */
+	protected $body;
 
-    public function setBody(Body $body)
-    {
-        $this->body = $body;
-    }
+	public function setBody(Body $body)
+	{
+		$this->body = $body;
+	}
 
-    public function setHeader(Header $header)
-    {
-        $this->header = $header;
-    }
+	public function setHeader(Header $header)
+	{
+		$this->header = $header;
+	}
 
-    abstract public function create();
+	abstract public function create();
 
 }

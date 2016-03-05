@@ -16,20 +16,20 @@ namespace Mesour\Table\Render;
 abstract class Cell
 {
 
-    protected $rawData;
+	protected $rawData;
 
-    protected $data;
+	protected $data;
 
-    /** @var IColumn */
-    protected $column;
+	/** @var IColumn */
+	protected $column;
 
-    public function __construct($data, IColumn $column, $rawData)
-    {
-        $this->data = $data;
-        $this->rawData = $rawData;
-        $this->column = $column;
-    }
+	public function __construct($data, IColumn $column, $rawData)
+	{
+		$this->data = $data;
+		$this->rawData = $rawData;
+		$this->column = $column;
+	}
 
-    abstract public function create();
+	abstract public function create();
 
 }

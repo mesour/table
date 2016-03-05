@@ -19,15 +19,15 @@ use Mesour\Table\Render;
 class HeaderCell extends Render\HeaderCell
 {
 
-    public function create()
-    {
-        $attributes = $this->column->getHeaderAttributes();
-        if ($attributes === FALSE) {
-            return '';
-        }
-        $td = Mesour\Components\Utils\Html::el('th', $attributes);
-        $td->setHtml($this->column->getHeaderContent());
-        return $td;
-    }
+	public function create()
+	{
+		$attributes = $this->column->getHeaderAttributes();
+		if ($attributes === false) {
+			return '';
+		}
+		$td = Mesour\Components\Utils\Html::el('th', $attributes);
+		$td->setHtml($this->column->getHeaderContent());
+		return $td;
+	}
 
 }

@@ -19,15 +19,15 @@ use Mesour\Table\Render;
 class Renderer extends Render\Renderer
 {
 
-    public function create()
-    {
-        $table = Mesour\Components\Utils\Html::el('table', $this->attributes);
+	public function create()
+	{
+		$table = Mesour\Components\Utils\Html::el('table', $this->attributes);
 
-        $table->add($this->header->create());
+		$table->add($this->header->create());
 
-        $table->add($this->body->create());
+		$table->add($this->body->create());
 
-        return $table;
-    }
+		return $table;
+	}
 
 }

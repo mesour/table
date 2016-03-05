@@ -16,14 +16,14 @@ namespace Mesour\Table\Render;
 abstract class Body extends Attributes
 {
 
-    /** @var Row[] */
-    protected $rows = [];
+	/** @var Row[] */
+	protected $rows = [];
 
-    public function addRow(Row $row)
-    {
-        $this->rows[] = $row;
-    }
+	public function addRow(Row $row)
+	{
+		$this->rows[] = $row;
+	}
 
-    abstract public function create();
+	abstract public function create();
 
 }

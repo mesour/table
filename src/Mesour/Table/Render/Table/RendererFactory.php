@@ -18,34 +18,34 @@ use Mesour\Table\Render;
 class RendererFactory implements Render\IRendererFactory
 {
 
-    public function createHeaderCell(Render\IColumn $column)
-    {
-        return new HeaderCell($column);
-    }
+	public function createHeaderCell(Render\IColumn $column)
+	{
+		return new HeaderCell($column);
+	}
 
-    public function createCell($data, Render\IColumn $column, $rawData)
-    {
-        return new Cell($data, $column, $rawData);
-    }
+	public function createCell($data, Render\IColumn $column, $rawData)
+	{
+		return new Cell($data, $column, $rawData);
+	}
 
-    public function createRow($data, $rawData)
-    {
-        return new Row($data, $rawData);
-    }
+	public function createRow($data, $rawData)
+	{
+		return new Row($data, $rawData);
+	}
 
-    public function createBody()
-    {
-        return new Body();
-    }
+	public function createBody()
+	{
+		return new Body();
+	}
 
-    public function createHeader()
-    {
-        return new Header();
-    }
+	public function createHeader()
+	{
+		return new Header();
+	}
 
-    public function createTable()
-    {
-        return new Renderer();
-    }
+	public function createTable()
+	{
+		return new Renderer();
+	}
 
 }

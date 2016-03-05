@@ -18,34 +18,34 @@ use Mesour;
 abstract class BaseColumn extends Mesour\Components\Control\AttributesControl implements Mesour\Table\Render\IColumn
 {
 
-    /**
-     * @param null $sub_control
-     * @return \Mesour\UI\Control
-     * @throws Mesour\InvalidStateException
-     */
-    public function getTable($sub_control = NULL)
-    {
-        $table = $this->lookup(ITable::class, FALSE, TRUE);
-        if (!$table instanceof ITable) {
-            throw new Mesour\InvalidStateException('Column is not attached to Table.');
-        }
-        if (is_null($sub_control)) {
-            return $table;
-        } else {
-            return $table[$sub_control];
-        }
-    }
+	/**
+	 * @param null $sub_control
+	 * @return \Mesour\UI\Control
+	 * @throws Mesour\InvalidStateException
+	 */
+	public function getTable($sub_control = null)
+	{
+		$table = $this->lookup(ITable::class, false, true);
+		if (!$table instanceof ITable) {
+			throw new Mesour\InvalidStateException('Column is not attached to Table.');
+		}
+		if (is_null($sub_control)) {
+			return $table;
+		} else {
+			return $table[$sub_control];
+		}
+	}
 
-    public function getHeaderAttributes()
-    {
-        return [];
-    }
+	public function getHeaderAttributes()
+	{
+		return [];
+	}
 
-    public function getBodyAttributes($data, $need = TRUE, $rawData = [])
-    {
-        $this->setOption('data', $data);
-        $this->setOption('rawData', $rawData);
-        return $this->getAttributes();
-    }
+	public function getBodyAttributes($data, $need = true, $rawData = [])
+	{
+		$this->setOption('data', $data);
+		$this->setOption('rawData', $rawData);
+		return $this->getAttributes();
+	}
 
 }

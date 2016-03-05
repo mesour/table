@@ -19,15 +19,15 @@ use Mesour\Table\Render;
 class Header extends Render\Header
 {
 
-    public function create()
-    {
-        $tableHead = Mesour\Components\Utils\Html::el('thead', $this->header_attributes);
-        $tr = Mesour\Components\Utils\Html::el('tr', $this->attributes);
-        foreach ($this->cells as $cell) {
-            $tr->add($cell->create());
-        }
-        $tableHead->add($tr);
-        return $tableHead;
-    }
+	public function create()
+	{
+		$tableHead = Mesour\Components\Utils\Html::el('thead', $this->header_attributes);
+		$tr = Mesour\Components\Utils\Html::el('tr', $this->attributes);
+		foreach ($this->cells as $cell) {
+			$tr->add($cell->create());
+		}
+		$tableHead->add($tr);
+		return $tableHead;
+	}
 
 }

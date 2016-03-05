@@ -18,37 +18,37 @@ use Mesour;
 interface IColumn extends Mesour\Components\ComponentModel\IContainer
 {
 
-    public function setName($name);
+	public function setName($name);
 
-    public function getName();
+	public function getName();
 
-    public function setHeader($header);
+	public function setHeader($header);
 
-    public function getHeader();
+	public function getHeader();
 
-    /**
-     * @return array
-     */
-    public function getHeaderAttributes();
+	/**
+	 * @return array
+	 */
+	public function getHeaderAttributes();
 
-    /**
-     * @return string|Mesour\Components\Utils\IString
-     */
-    public function getHeaderContent();
+	/**
+	 * @return string|Mesour\Components\Utils\IString
+	 */
+	public function getHeaderContent();
 
-    /**
-     * @param $data
-     * @param bool|TRUE $need
-     * @param array $rawData
-     * @return array
-     */
-    public function getBodyAttributes($data, $need = TRUE, $rawData = []);
+	/**
+	 * @param $data
+	 * @param bool|TRUE $need
+	 * @param array $rawData
+	 * @return array
+	 */
+	public function getBodyAttributes($data, $need = true, $rawData = []);
 
-    /**
-     * @param $data
-     * @param array $rawData
-     * @return string|Mesour\Components\Utils\IString
-     */
-    public function getBodyContent($data, $rawData);
+	/**
+	 * @param $data
+	 * @param array $rawData
+	 * @return string|Mesour\Components\Utils\IString
+	 */
+	public function getBodyContent($data, $rawData);
 
 }
