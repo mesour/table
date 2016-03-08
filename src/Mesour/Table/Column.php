@@ -32,7 +32,7 @@ class Column extends BaseColumn
 
 	public function setHeader($header)
 	{
-		$this->header = $this->getTranslator()->translate($header);
+		$this->header = $header;
 		return $this;
 	}
 
@@ -61,7 +61,8 @@ class Column extends BaseColumn
 	 */
 	public function getHeaderContent()
 	{
-		return Mesour\Components\Utils\Html::el('span', !$this->header ? $this->getName() : $this->header);
+		$header = !$this->header ? $this->getName() : $this->header;
+		return Mesour\Components\Utils\Html::el('span', $this->getTranslator()->translate($header));
 	}
 
 	public function getBodyAttributes($data, $need = true, $rawData = [])
