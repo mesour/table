@@ -10,7 +10,7 @@
   }],
   "require": {
     "php": ">=5.5.0",
-    "mesour/sources": "3.0.*@beta",
+    "mesour/sources": "dev-master",
     "mesour/components": "3.0.*@beta"
   },
   "require-dev": {
