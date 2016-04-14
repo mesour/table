@@ -43,18 +43,21 @@ function loadClasses($className)
 
 	$data = [
 		[
+			'id' => 1,
 			'method' => 'setName',
 			'params' => '$name',
 			'returns' => 'Mesour\Table\Column',
 			'description' => 'Set column name.',
 		],
 		[
+			'id' => 2,
 			'method' => 'setHeader',
 			'params' => '$header',
 			'returns' => 'Mesour\Table\Column',
 			'description' => 'Set header text.',
 		],
 		[
+			'id' => 3,
 			'method' => 'setCallback',
 			'params' => '$callback',
 			'returns' => 'Mesour\Table\Column',
@@ -62,7 +65,7 @@ function loadClasses($className)
 		],
 	];
 
-	$table->setSource($data);
+	$table->setSource(new \Mesour\Sources\ArraySource('methods', 'id', $data));
 
 	$table->onRenderRow[] = function (\Mesour\Table\Render\Table\Row $row) {
 		$row->setAttribute('class', 'test-class', true);

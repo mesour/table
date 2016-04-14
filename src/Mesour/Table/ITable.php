@@ -22,7 +22,7 @@ interface ITable extends Mesour\Components\ComponentModel\IContainer
 	 * @param mixed $source
 	 * @return mixed
 	 */
-	public function setSource($source);
+	public function setSource(Mesour\Sources\ISource $source);
 
 	public function render();
 
