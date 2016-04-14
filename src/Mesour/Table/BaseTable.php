@@ -32,22 +32,15 @@ abstract class BaseTable extends Mesour\UI\Control implements ITable
 	protected $isSourceUsed = false;
 
 	/**
-	 * @param mixed $source
+	 * @param Mesour\Sources\ISource $source
 	 * @return $this
 	 * @throws Mesour\InvalidStateException
 	 * @throws Mesour\InvalidArgumentException
 	 */
-	public function setSource($source)
+	public function setSource(Mesour\Sources\ISource $source)
 	{
 		if ($this->isSourceUsed) {
 			throw new Mesour\InvalidStateException('Cannot change source after using them.');
-		}
-		if (!$source instanceof Mesour\Sources\ISource) {
-			if (is_array($source)) {
-				$source = new Mesour\Sources\ArraySource($source);
-			} else {
-				throw new Mesour\Sources\InvalidArgumentException('Source must be instance of ' . Mesour\Sources\ISource::class . ' or array.');
-			}
 		}
 		$this->source = $source;
 		return $this;
