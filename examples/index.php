@@ -8,25 +8,15 @@ define('SRC_DIR', __DIR__ . '/../src/');
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-spl_autoload_register('loadClasses', true, true);
-
-function loadClasses($className)
-{
-	$filename = str_replace('\\', DIRECTORY_SEPARATOR, $className) . '.php';
-
-	if (!is_file(SRC_DIR . $filename)) {
-		return false;
-	}
-
-	require_once SRC_DIR . $filename;
-
-	return true;
-}
-
 @mkdir(__DIR__ . '/log');
+@mkdir(__DIR__ . '/tmp');
 
 \Tracy\Debugger::enable(\Tracy\Debugger::DEVELOPMENT, __DIR__ . '/log');
 
+$loader = new Nette\Loaders\RobotLoader;
+$loader->addDirectory(SRC_DIR);
+$loader->setCacheStorage(new Nette\Caching\Storages\FileStorage(__DIR__ . '/tmp'));
+$loader->register();
 
 ?>
 
@@ -90,5 +80,3 @@ function loadClasses($className)
 </div>
 
 <hr>
-
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

@@ -11,7 +11,6 @@ namespace Mesour\Table;
 
 use Mesour;
 
-
 /**
  * @author Matouš Němec <matous.nemec@mesour.com>
  */
@@ -19,7 +18,7 @@ interface ITable extends Mesour\Components\ComponentModel\IContainer
 {
 
 	/**
-	 * @param mixed $source
+	 * @param Mesour\Sources\ISource $source
 	 * @return mixed
 	 */
 	public function setSource(Mesour\Sources\ISource $source);

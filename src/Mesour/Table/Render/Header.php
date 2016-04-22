@@ -9,14 +9,13 @@
 
 namespace Mesour\Table\Render;
 
-
 /**
  * @author Matouš Němec <matous.nemec@mesour.com>
  */
 abstract class Header extends Attributes
 {
 
-	protected $header_attributes = [];
+	protected $headerAttributes = [];
 
 	/**
 	 * @var Cell[]
@@ -28,9 +27,9 @@ abstract class Header extends Attributes
 		$this->cells[] = $cell;
 	}
 
-	public function setTHeadAttributes(array $header_attributes)
+	public function setTHeadAttributes(array $headerAttributes)
 	{
-		$this->header_attributes = $header_attributes;
+		$this->headerAttributes = $headerAttributes;
 	}
 
 	abstract public function create();

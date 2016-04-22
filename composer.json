@@ -10,12 +10,16 @@
   }],
   "require": {
     "php": ">=5.5.0",
-    "mesour/sources": "3.0.*@beta",
+    "mesour/sources": "dev-master",
     "mesour/components": "3.0.*@beta"
   },
   "require-dev": {
     "tracy/tracy": "~2.3.0",
-    "mesour/array-manager": "dev-master"
+    "mesour/array-manager": "dev-master",
+    "nette/tester": "^1.7",
+    "slevomat/coding-standard": "^1.0",
+    "consistence/coding-standard": "^0.10",
+    "nette/robot-loader": "^2.3"
   },
   "minimum-stability": "beta",
   "autoload": {

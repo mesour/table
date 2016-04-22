@@ -11,7 +11,6 @@ namespace Mesour\Table\Render;
 
 use Mesour;
 
-
 /**
  * @author Matouš Němec <matous.nemec@mesour.com>
  */
@@ -37,7 +36,7 @@ interface IColumn extends Mesour\Components\ComponentModel\IContainer
 	public function getHeaderContent();
 
 	/**
-	 * @param $data
+	 * @param array $data
 	 * @param bool|TRUE $need
 	 * @param array $rawData
 	 * @return array
@@ -45,7 +44,7 @@ interface IColumn extends Mesour\Components\ComponentModel\IContainer
 	public function getBodyAttributes($data, $need = true, $rawData = []);
 
 	/**
-	 * @param $data
+	 * @param array $data
 	 * @param array $rawData
 	 * @return string|Mesour\Components\Utils\IString
 	 */

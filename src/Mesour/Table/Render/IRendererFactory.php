@@ -9,7 +9,6 @@
 
 namespace Mesour\Table\Render;
 
-
 /**
  * @author Matouš Němec <matous.nemec@mesour.com>
  */
@@ -23,16 +22,16 @@ interface IRendererFactory
 	public function createHeaderCell(IColumn $column);
 
 	/**
-	 * @param $data
+	 * @param array $data
 	 * @param IColumn $column
-	 * @param $rawData
+	 * @param array $rawData
 	 * @return Cell
 	 */
 	public function createCell($data, IColumn $column, $rawData);
 
 	/**
-	 * @param $data
-	 * @param $rawData
+	 * @param array $data
+	 * @param array $rawData
 	 * @return Row
 	 */
 	public function createRow($data, $rawData);

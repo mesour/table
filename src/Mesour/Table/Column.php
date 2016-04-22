@@ -11,7 +11,6 @@ namespace Mesour\Table;
 
 use Mesour;
 
-
 /**
  * @author Matouš Němec <matous.nemec@mesour.com>
  */
@@ -45,7 +44,7 @@ class Column extends BaseColumn
 	}
 
 	/**
-	 * @param $callback  callable
+	 * @param callable $callback  callable
 	 * @return $this
 	 * @throws Mesour\InvalidArgumentException
 	 */
@@ -78,7 +77,7 @@ class Column extends BaseColumn
 	}
 
 	/**
-	 * @param $data
+	 * @param mixed $data
 	 * @param array $rawData
 	 * @return string|Mesour\Components\Utils\IString
 	 */

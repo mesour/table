@@ -11,7 +11,6 @@ namespace Mesour\Table\Render;
 
 use Mesour;
 
-
 /**
  * @author Matouš Němec <matous.nemec@mesour.com>
  */

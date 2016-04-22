@@ -9,7 +9,6 @@
 
 namespace Mesour\Table\Render;
 
-
 /**
  * @author Matouš Němec <matous.nemec@mesour.com>
  */

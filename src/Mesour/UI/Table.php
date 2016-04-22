@@ -11,7 +11,6 @@ namespace Mesour\UI;
 
 use Mesour;
 
-
 /**
  * @author Matouš Němec <matous.nemec@mesour.com>
  *
@@ -57,7 +56,7 @@ class Table extends Mesour\Table\BaseTable
 	}
 
 	/**
-	 * @param $name
+	 * @param string $name
 	 * @param null $header
 	 * @return Mesour\Table\Column
 	 */

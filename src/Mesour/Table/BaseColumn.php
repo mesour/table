@@ -11,7 +11,6 @@ namespace Mesour\Table;
 
 use Mesour;
 
-
 /**
  * @author Matouš Němec <matous.nemec@mesour.com>
  */
@@ -19,20 +18,20 @@ abstract class BaseColumn extends Mesour\Components\Control\AttributesControl im
 {
 
 	/**
-	 * @param null $sub_control
+	 * @param null $subControl
 	 * @return \Mesour\UI\Control
 	 * @throws Mesour\InvalidStateException
 	 */
-	public function getTable($sub_control = null)
+	public function getTable($subControl = null)
 	{
 		$table = $this->lookup(ITable::class, false, true);
 		if (!$table instanceof ITable) {
 			throw new Mesour\InvalidStateException('Column is not attached to Table.');
 		}
-		if (is_null($sub_control)) {
+		if (is_null($subControl)) {
 			return $table;
 		} else {
-			return $table[$sub_control];
+			return $table[$subControl];
 		}
 	}
 

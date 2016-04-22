@@ -12,7 +12,6 @@ namespace Mesour\Table\Render\Table;
 use Mesour;
 use Mesour\Table\Render;
 
-
 /**
  * @author Matouš Němec <matous.nemec@mesour.com>
  */
@@ -21,7 +20,7 @@ class Header extends Render\Header
 
 	public function create()
 	{
-		$tableHead = Mesour\Components\Utils\Html::el('thead', $this->header_attributes);
+		$tableHead = Mesour\Components\Utils\Html::el('thead', $this->headerAttributes);
 		$tr = Mesour\Components\Utils\Html::el('tr', $this->attributes);
 		foreach ($this->cells as $cell) {
 			$tr->add($cell->create());
