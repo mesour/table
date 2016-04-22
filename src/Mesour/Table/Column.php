@@ -91,6 +91,17 @@ class Column extends BaseColumn
 		if ($content instanceof \DateTime) {
 			return $content->format('U');
 		}
+
+		if ($content instanceof Mesour\Sources\ArrayHash || is_array($content)) {
+			if (isset($content['_pattern'])) {
+				return $content['_pattern'];
+			} else {
+				throw new Mesour\InvalidStateException(
+					'Can not convert array to string. Can use method `setPattern` on data structure referenced columns.'
+				);
+			}
+		}
+
 		return $content;
 	}
 

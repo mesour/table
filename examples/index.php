@@ -1,6 +1,6 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-	  integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+      integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
 <?php
 
@@ -34,6 +34,7 @@ $loader->register();
 	$data = [
 		[
 			'id' => 1,
+			'group_id' => 1,
 			'method' => 'setName',
 			'params' => '$name',
 			'returns' => 'Mesour\Table\Column',
@@ -41,6 +42,7 @@ $loader->register();
 		],
 		[
 			'id' => 2,
+			'group_id' => 2,
 			'method' => 'setHeader',
 			'params' => '$header',
 			'returns' => 'Mesour\Table\Column',
@@ -48,6 +50,7 @@ $loader->register();
 		],
 		[
 			'id' => 3,
+			'group_id' => 1,
 			'method' => 'setCallback',
 			'params' => '$callback',
 			'returns' => 'Mesour\Table\Column',
@@ -55,7 +58,32 @@ $loader->register();
 		],
 	];
 
-	$table->setSource(new \Mesour\Sources\ArraySource('methods', 'id', $data));
+	$source = new \Mesour\Sources\ArraySource('methods', 'id', $data, [
+		'groups' => [
+			[
+				'id' => 1,
+				'name' => 'Test 1',
+			],
+			[
+				'id' => 2,
+				'name' => 'Test 2',
+			]
+		]
+	]);
+	$table->setSource($source);
+
+	$dataStructrure = $source->getDataStructure();
+
+	$groupsStructure = $dataStructrure->getOrCreateTableStructure('groups', 'id');
+	$groupsStructure->addNumber('id');
+	$groupsStructure->addText('name');
+
+	$dataStructrure->addNumber('id');
+	$dataStructrure->addText('method');
+	$dataStructrure->addText('params');
+	$dataStructrure->addText('returns');
+	$dataStructrure->addText('description');
+	$dataStructrure->addManyToOne('group', 'groups', 'group_id', '{name}');
 
 	$table->onRenderRow[] = function (\Mesour\Table\Render\Table\Row $row) {
 		$row->setAttribute('class', 'test-class', true);
@@ -64,13 +92,17 @@ $loader->register();
 	$table->setAttribute('class', 'table table-striped table-hover');
 
 	$table->addColumn('method', 'Method')
-		->setCallback(function ($rawData, \Mesour\Table\Column $column) {
-			return \Mesour\Components\Utils\Html::el('b')->setText($rawData['method']);
-		});
+		->setCallback(
+			function ($rawData, \Mesour\Table\Column $column) {
+				return \Mesour\Components\Utils\Html::el('b')->setText($rawData['method']);
+			}
+		);
 
 	$table->addColumn('params', 'Parameters');
 
 	$table->addColumn('returns', 'Returns');
+
+	$table->addColumn('group', 'Group');
 
 	$table->addColumn('description', 'Description');
 
