@@ -53,7 +53,7 @@ interface IColumn extends Mesour\Components\ComponentModel\IContainer
 	/**
 	 * @return bool
 	 */
-	public function isRelationColumn();
+	public function isReferencedColumn();
 
 	/**
 	 * @return Mesour\Table\IListRenderer

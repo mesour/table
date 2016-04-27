@@ -126,7 +126,7 @@ class Column extends BaseColumn
 	/**
 	 * @return bool
 	 */
-	public function isRelationColumn()
+	public function isReferencedColumn()
 	{
 		$dataStructure = $this->getTable()->getSource()->getDataStructure();
 		if ($dataStructure->hasColumn($this->getName())) {
@@ -154,7 +154,7 @@ class Column extends BaseColumn
 			}
 			return $list;
 		} else {
-			if ($this->isRelationColumn()) {
+			if ($this->isReferencedColumn()) {
 				return $list;
 			}
 			return '';
