@@ -12,7 +12,7 @@ namespace Mesour\Table\Render\Table;
 use Mesour\Table\Render;
 
 /**
- * @author Matouš Němec <matous.nemec@mesour.com>
+ * @author Matouš Němec (http://mesour.com)
  */
 class RendererFactory implements Render\IRendererFactory
 {

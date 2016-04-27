@@ -10,7 +10,7 @@
 namespace Mesour\Table\Render;
 
 /**
- * @author Matouš Němec <matous.nemec@mesour.com>
+ * @author Matouš Němec (http://mesour.com)
  */
 abstract class Header extends Attributes
 {

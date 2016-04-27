@@ -12,14 +12,14 @@ namespace Mesour\Table;
 use Mesour;
 
 /**
- * @author Matouš Němec <matous.nemec@mesour.com>
+ * @author Matouš Němec (http://mesour.com)
  */
 abstract class BaseColumn extends Mesour\Components\Control\AttributesControl implements Mesour\Table\Render\IColumn
 {
 
 	/**
 	 * @param null $subControl
-	 * @return \Mesour\UI\Control
+	 * @return ITable
 	 * @throws Mesour\InvalidStateException
 	 */
 	public function getTable($subControl = null)

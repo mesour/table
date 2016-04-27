@@ -13,7 +13,7 @@ use Mesour;
 use Mesour\Table\Render;
 
 /**
- * @author Matouš Němec <matous.nemec@mesour.com>
+ * @author Matouš Němec (http://mesour.com)
  */
 class Body extends Render\Body
 {

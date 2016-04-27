@@ -12,7 +12,7 @@ namespace Mesour\Table\Render;
 use Mesour;
 
 /**
- * @author Matouš Němec <matous.nemec@mesour.com>
+ * @author Matouš Němec (http://mesour.com)
  */
 abstract class Attributes
 {

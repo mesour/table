@@ -12,7 +12,7 @@ namespace Mesour\Table;
 use Mesour;
 
 /**
- * @author Matouš Němec <matous.nemec@mesour.com>
+ * @author Matouš Němec (http://mesour.com)
  */
 class Column extends BaseColumn
 {
@@ -29,6 +29,11 @@ class Column extends BaseColumn
 
 	private $callback;
 
+	/**
+	 * @var IListRenderer
+	 */
+	private $listRenderer;
+
 	public function setHeader($header)
 	{
 		$this->header = $header;
@@ -44,7 +49,7 @@ class Column extends BaseColumn
 	}
 
 	/**
-	 * @param callable $callback  callable
+	 * @param callable $callback callable
 	 * @return $this
 	 * @throws Mesour\InvalidArgumentException
 	 */
@@ -64,6 +69,23 @@ class Column extends BaseColumn
 		return Mesour\Components\Utils\Html::el('span', $this->getTranslator()->translate($header));
 	}
 
+	/**
+	 * @return IListRenderer
+	 */
+	public function getListRenderer()
+	{
+		if (!$this->listRenderer) {
+			$this->setListRenderer(new ListRenderer($this));
+		}
+		return $this->listRenderer;
+	}
+
+	public function setListRenderer(IListRenderer $renderer)
+	{
+		$this->listRenderer = $renderer;
+		return $this;
+	}
+
 	public function getBodyAttributes($data, $need = true, $rawData = [])
 	{
 		if (
@@ -71,7 +93,9 @@ class Column extends BaseColumn
 			&& !isset($data[$this->getName()])
 			&& (array_key_exists($this->getName(), $data) && !is_null($data[$this->getName()]))
 		) {
-			throw new Mesour\OutOfRangeException('Column with name ' . $this->getName() . ' does not exists in data source.');
+			throw new Mesour\OutOfRangeException(
+				'Column with name ' . $this->getName() . ' does not exists in data source.'
+			);
 		}
 		return parent::getBodyAttributes($data);
 	}
@@ -92,7 +116,43 @@ class Column extends BaseColumn
 			return $content->format('U');
 		}
 
+		if (is_array($content)) {
+			return $this->renderListContent($content);
+		}
+
 		return !$content ? '' : $content;
+	}
+
+	/**
+	 * @param mixed $content
+	 * @return IListRenderer|string
+	 */
+	protected function renderListContent($content)
+	{
+		$list = clone $this->getListRenderer();
+
+		if (count($content) > 0) {
+			foreach ($content as $contentItem) {
+				$column = clone $this;
+				$column->setName('_pattern');
+				$list->addItem($contentItem, $column->getBodyContent($contentItem, []));
+			}
+			return $list;
+		} else {
+			$dataStructure = $this->getTable()->getSource()->getDataStructure();
+			if ($dataStructure->hasColumn($this->getName())) {
+				$column = $dataStructure->getColumn($this->getName());
+				if (
+					$column instanceof Mesour\Sources\Structures\Columns\ManyToManyColumnStructure
+					|| $column instanceof Mesour\Sources\Structures\Columns\OneToManyColumnStructure
+					|| $column instanceof Mesour\Sources\Structures\Columns\OneToOneColumnStructure
+					|| $column instanceof Mesour\Sources\Structures\Columns\ManyToOneColumnStructure
+				) {
+					return $list;
+				}
+			}
+			return '';
+		}
 	}
 
 	/**
@@ -101,7 +161,10 @@ class Column extends BaseColumn
 	 */
 	protected function tryInvokeCallback(array $args = [])
 	{
-		return $this->callback ? Mesour\Components\Utils\Helpers::invokeArgs($this->callback, $args) : self::NO_CALLBACK;
+		return $this->callback ? Mesour\Components\Utils\Helpers::invokeArgs(
+			$this->callback,
+			$args
+		) : self::NO_CALLBACK;
 	}
 
 }

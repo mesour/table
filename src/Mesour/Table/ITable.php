@@ -12,7 +12,7 @@ namespace Mesour\Table;
 use Mesour;
 
 /**
- * @author Matouš Němec <matous.nemec@mesour.com>
+ * @author Matouš Němec (http://mesour.com)
  */
 interface ITable extends Mesour\Components\ComponentModel\IContainer
 {
@@ -22,6 +22,34 @@ interface ITable extends Mesour\Components\ComponentModel\IContainer
 	 * @return mixed
 	 */
 	public function setSource(Mesour\Sources\ISource $source);
+
+	/**
+	 * @return Mesour\Sources\ISource
+	 */
+	public function getSource();
+
+	/**
+	 * @param Mesour\Table\Render\IRendererFactory $rendererFactory
+	 * @return mixed
+	 * @throws Mesour\InvalidStateException
+	 */
+	public function setRendererFactory(Mesour\Table\Render\IRendererFactory $rendererFactory);
+
+	public function setAttributes(array $attributes = []);
+
+	public function setAttribute($key, $value, $append = false);
+
+	/**
+	 * @param string $name
+	 * @param null $header
+	 * @return Mesour\Table\Column
+	 */
+	public function addColumn($name, $header = null);
+
+	/**
+	 * @return Mesour\Components\ComponentModel\IContainer[]
+	 */
+	public function getColumns();
 
 	public function render();
 

@@ -12,7 +12,7 @@ namespace Mesour\UI;
 use Mesour;
 
 /**
- * @author Matouš Němec <matous.nemec@mesour.com>
+ * @author Matouš Němec (http://mesour.com)
  *
  * @method null onRenderHeader(Mesour\Table\Render\Table\Header $header, $rawData, $data)
  * @method null onRender(Table $table, $rawData, $data)
