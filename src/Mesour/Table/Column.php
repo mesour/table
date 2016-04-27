@@ -61,15 +61,6 @@ class Column extends BaseColumn
 	}
 
 	/**
-	 * @return string|Mesour\Components\Utils\IString
-	 */
-	public function getHeaderContent()
-	{
-		$header = !$this->header ? $this->getName() : $this->header;
-		return Mesour\Components\Utils\Html::el('span', $this->getTranslator()->translate($header));
-	}
-
-	/**
 	 * @return IListRenderer
 	 */
 	public function getListRenderer()
@@ -84,6 +75,15 @@ class Column extends BaseColumn
 	{
 		$this->listRenderer = $renderer;
 		return $this;
+	}
+
+	/**
+	 * @return string|Mesour\Components\Utils\IString
+	 */
+	public function getHeaderContent()
+	{
+		$header = !$this->header ? $this->getName() : $this->header;
+		return Mesour\Components\Utils\Html::el('span', $this->getTranslator()->translate($header));
 	}
 
 	public function getBodyAttributes($data, $need = true, $rawData = [])
@@ -124,6 +124,21 @@ class Column extends BaseColumn
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function isRelationColumn()
+	{
+		$dataStructure = $this->getTable()->getSource()->getDataStructure();
+		if ($dataStructure->hasColumn($this->getName())) {
+			$column = $dataStructure->getColumn($this->getName());
+			if ($column instanceof Mesour\Sources\Structures\Columns\BaseTableColumnStructure) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * @param mixed $content
 	 * @return IListRenderer|string
 	 */
@@ -139,17 +154,8 @@ class Column extends BaseColumn
 			}
 			return $list;
 		} else {
-			$dataStructure = $this->getTable()->getSource()->getDataStructure();
-			if ($dataStructure->hasColumn($this->getName())) {
-				$column = $dataStructure->getColumn($this->getName());
-				if (
-					$column instanceof Mesour\Sources\Structures\Columns\ManyToManyColumnStructure
-					|| $column instanceof Mesour\Sources\Structures\Columns\OneToManyColumnStructure
-					|| $column instanceof Mesour\Sources\Structures\Columns\OneToOneColumnStructure
-					|| $column instanceof Mesour\Sources\Structures\Columns\ManyToOneColumnStructure
-				) {
-					return $list;
-				}
+			if ($this->isRelationColumn()) {
+				return $list;
 			}
 			return '';
 		}

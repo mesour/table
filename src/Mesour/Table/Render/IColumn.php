@@ -50,4 +50,16 @@ interface IColumn extends Mesour\Components\ComponentModel\IContainer
 	 */
 	public function getBodyContent($data, $rawData);
 
+	/**
+	 * @return bool
+	 */
+	public function isRelationColumn();
+
+	/**
+	 * @return Mesour\Table\IListRenderer
+	 */
+	public function getListRenderer();
+
+	public function setListRenderer(Mesour\Table\IListRenderer $renderer);
+
 }
