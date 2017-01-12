@@ -1,9 +1,4 @@
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-      integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
 <?php
-
 define('SRC_DIR', __DIR__ . '/../src/');
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -19,6 +14,10 @@ $loader->setCacheStorage(new Nette\Caching\Storages\FileStorage(__DIR__ . '/tmp'
 $loader->register();
 
 ?>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+      integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
 <hr>
 
@@ -49,6 +48,13 @@ $loader->register();
 		[
 			'id' => 3,
 			'group_id' => 1,
+			'method' => 'setCallback',
+			'returns' => 'Mesour\Table\Column',
+			'description' => 'Set render callback.',
+		],
+		[
+			'id' => 3,
+			'group_id' => null,
 			'method' => 'setCallback',
 			'returns' => 'Mesour\Table\Column',
 			'description' => 'Set render callback.',

@@ -7,14 +7,15 @@
  * For full licence and copyright please view the file licence.md in root of this project
  */
 
-namespace Mesour\Table;
+namespace Mesour\Table\Render\Lists;
 
 use Mesour;
+use Mesour\Table\Render\IColumn;
 
 /**
  * @author Matouš Němec (http://mesour.com)
  *
- * @method void onRenderRow(Mesour\Components\Utils\Html $li, $data, $content)
+ * @method void onRenderRow(ListRenderer $renderer, Mesour\Components\Utils\Html $li, $data, $content)
  * @method void onRender(ListRenderer $renderer, Mesour\Components\Utils\Html $wrapper)
  */
 class ListRenderer extends Mesour\Object implements IListRenderer
@@ -30,7 +31,7 @@ class ListRenderer extends Mesour\Object implements IListRenderer
 	private $wrapperPrototype;
 
 	/**
-	 * @var Render\IColumn
+	 * @var IColumn
 	 */
 	private $column;
 
@@ -40,9 +41,17 @@ class ListRenderer extends Mesour\Object implements IListRenderer
 
 	public $onRenderRow = [];
 
-	public function __construct(Mesour\Table\Render\IColumn $column)
+	public function __construct(IColumn $column)
 	{
 		$this->column = $column;
+	}
+
+	/**
+	 * @return callable
+	 */
+	protected function getCallback()
+	{
+		return $this->callback;
 	}
 
 	public function setCallback($callable)
@@ -51,14 +60,14 @@ class ListRenderer extends Mesour\Object implements IListRenderer
 		return $this;
 	}
 
-	public function addItem($data, $content)
+	public function addItem($contentItem, $content, $data)
 	{
-		$this->items[] = [$data, $content];
+		$this->items[] = [$data, $content, $data];
 		return $this;
 	}
 
 	/**
-	 * @return Render\IColumn
+	 * @return IColumn
 	 */
 	public function getColumn()
 	{
@@ -107,7 +116,7 @@ class ListRenderer extends Mesour\Object implements IListRenderer
 			} else {
 				$li->add($item[1]);
 			}
-			$this->onRenderRow($li, $item[0], $item[1]);
+			$this->onRenderRow($this, $li, $item[0], $item[1]);
 			$wrapper->add($li);
 		}
 
@@ -120,6 +129,15 @@ class ListRenderer extends Mesour\Object implements IListRenderer
 			return (string) $this->render();
 		} catch (\Exception $e) {
 			trigger_error($e, E_USER_ERROR);
+		}
+		return '';
+	}
+
+	public function __clone()
+	{
+		if ($this->wrapperPrototype) {
+			$this->wrapperPrototype = clone $this->wrapperPrototype;
+			$this->wrapperPrototype->removeChildren();
 		}
 	}
 

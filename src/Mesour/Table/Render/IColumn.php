@@ -56,10 +56,10 @@ interface IColumn extends Mesour\Components\ComponentModel\IContainer
 	public function isReferencedColumn();
 
 	/**
-	 * @return Mesour\Table\IListRenderer
+	 * @return Mesour\Table\Render\Lists\IListRenderer
 	 */
 	public function getListRenderer();
 
-	public function setListRenderer(Mesour\Table\IListRenderer $renderer);
+	public function setListRenderer(Mesour\Table\Render\Lists\IListRenderer $renderer);
 
 }

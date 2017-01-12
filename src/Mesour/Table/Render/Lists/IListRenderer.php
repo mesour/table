@@ -7,7 +7,7 @@
  * For full licence and copyright please view the file licence.md in root of this project
  */
 
-namespace Mesour\Table;
+namespace Mesour\Table\Render\Lists;
 
 use Mesour;
 
@@ -24,11 +24,12 @@ interface IListRenderer extends Mesour\Components\Utils\IString
 	public function setCallback($callable);
 
 	/**
-	 * @param array|mixed $data
+	 * @param array|mixed $contentItem
 	 * @param string $content
+	 * @param array|mixed $data
 	 * @return mixed
 	 */
-	public function addItem($data, $content);
+	public function addItem($contentItem, $content, $data);
 
 	/**
 	 * @return Mesour\Components\Utils\Html
