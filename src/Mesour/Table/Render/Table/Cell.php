@@ -20,7 +20,7 @@ class Cell extends Render\Cell
 
 	public function create()
 	{
-		if ($this->column instanceof Mesour\Object && isset($this->column->onRender)) {
+		if (isset($this->column->onRender)) {
 			$this->column->onRender($this->rawData, $this->column);
 		}
 		$attributes = $this->column->getBodyAttributes($this->data, true, $this->rawData);

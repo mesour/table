@@ -18,8 +18,10 @@ use Mesour\Table\Render\IColumn;
  * @method void onRenderRow(ListRenderer $renderer, Mesour\Components\Utils\Html $li, $data, $content)
  * @method void onRender(ListRenderer $renderer, Mesour\Components\Utils\Html $wrapper)
  */
-class ListRenderer extends Mesour\Object implements IListRenderer
+class ListRenderer implements IListRenderer
 {
+
+	use Mesour\SmartObject;
 
 	private $items = [];
 
